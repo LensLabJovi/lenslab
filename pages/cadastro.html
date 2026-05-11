@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro — LensLab</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+
+  <main class="auth-page">
+
+    <div class="auth-container">
+      <a href="../index.html" class="back-link">← Voltar</a>
+
+      <header class="auth-header">
+        <span class="logo-icon">📸</span>
+        <h1>Criar conta</h1>
+        <p>Comece a capturar momentos incríveis</p>
+      </header>
+
+      <form class="auth-form" id="signupForm" novalidate>
+
+        <div class="form-group">
+          <label for="name">Nome completo</label>
+          <input type="text" id="name" name="name" placeholder="João da Silva" required minlength="3">
+          <small class="error-message" id="name-error"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+          <small class="error-message" id="email-error"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" name="password" placeholder="Mínimo 6 caracteres" required minlength="6">
+          <small class="error-message" id="password-error"></small>
+          <div class="password-strength">
+            <div class="strength-bar"><span></span></div>
+            <small>Use letras, números e símbolos</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirm">Confirmar senha</label>
+          <input type="password" id="confirm" name="confirm" placeholder="Digite novamente" required>
+          <small class="error-message" id="confirm-error"></small>
+        </div>
+
+        <label class="checkbox-label">
+          <input type="checkbox" name="terms" required>
+          <span>Aceito os <a href="#" class="link-primary">termos de uso</a> e a <a href="#" class="link-primary">política de privacidade</a></span>
+        </label>
+
+        <button type="submit" class="btn-primary btn-large btn-block">
+          Criar conta
+        </button>
+
+        <p class="auth-footer">
+          Já tem conta?
+          <a href="login.html" class="link-primary">Entrar</a>
+        </p>
+      </form>
+    </div>
+
+    <aside class="auth-decoration">
+      <div class="deco-content">
+        <h2>Sua jornada começa aqui</h2>
+        <p>Faça parte da comunidade LensLab e descubra um novo jeito de fotografar.</p>
+        <ul class="deco-features">
+          <li>✓ 100% gratuito</li>
+          <li>✓ Sem anúncios</li>
+          <li>✓ Backup ilimitado</li>
+          <li>✓ Atualizações constantes</li>
+        </ul>
+      </div>
+    </aside>
+
+  </main>
+<script src="../js/auth.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/cadastro.js"></script>
+</body>
+</html>

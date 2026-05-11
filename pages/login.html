@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — LensLab</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+
+  <main class="auth-page">
+
+    <div class="auth-container">
+      <a href="../index.html" class="back-link">← Voltar</a>
+
+      <header class="auth-header">
+        <span class="logo-icon">📸</span>
+        <h1>Bem-vindo de volta</h1>
+        <p>Entre com sua conta para continuar</p>
+      </header>
+
+      <form class="auth-form" id="loginForm" novalidate>
+
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="seu@email.com"
+            required
+            autocomplete="email"
+          >
+          <small class="error-message" id="email-error"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Digite sua senha"
+            required
+            minlength="6"
+            autocomplete="current-password"
+          >
+          <small class="error-message" id="password-error"></small>
+        </div>
+
+        <div class="form-row">
+          <label class="checkbox-label">
+            <input type="checkbox" name="remember">
+            <span>Lembrar de mim</span>
+          </label>
+          <a href="#" class="link-secondary">Esqueci minha senha</a>
+        </div>
+
+        <button type="submit" class="btn-primary btn-large btn-block">
+          Entrar
+        </button>
+
+        <div class="divider">
+          <span>ou</span>
+        </div>
+
+        <div class="social-buttons">
+          <button type="button" class="btn-social">
+            <span>🔵</span> Continuar com Google
+          </button>
+          <button type="button" class="btn-social">
+            <span>⚫</span> Continuar com Apple
+          </button>
+        </div>
+
+        <p class="auth-footer">
+          Não tem conta?
+          <a href="cadastro.html" class="link-primary">Criar conta grátis</a>
+        </p>
+      </form>
+    </div>
+
+
+    <aside class="auth-decoration">
+      <div class="deco-content">
+        <h2>Capture cada momento com perfeição</h2>
+        <p>Junte-se a milhares de usuários que já transformam suas fotos com o LensLab.</p>
+        <ul class="deco-features">
+          <li>✓ 13 modos especializados</li>
+          <li>✓ Controles profissionais</li>
+          <li>✓ Backup automático</li>
+          <li>✓ Edição inteligente</li>
+        </ul>
+      </div>
+    </aside>
+
+  </main>
+<script src="../js/auth.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/login.js"></script>
+</body>
+</html>
