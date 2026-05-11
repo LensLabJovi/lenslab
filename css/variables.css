@@ -1,0 +1,44 @@
+
+
+:root {
+  
+  --bg: #0A0A0A;
+  --bg-deep: #050508;
+  --surface: #1A1A1A;
+  --surface-light: #2A2A2A;
+
+ 
+  --primary: #6C5CE7;
+  --primary-light: #A29BFE;
+  --accent: #00D2D3;
+  --accent-warm: #FD79A8;
+
+  
+  --text: #FFFFFF;
+  --text-secondary: #B2BEC3;
+  --text-muted: #636E72;
+
+  
+  --success: #00B894;
+  --warning: #FDCB6E;
+  --danger: #E74C3C;
+
+  
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --card-border: rgba(255, 255, 255, 0.12);
+
+  
+  --font-display: 'DM Sans', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+
+  
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-button: 0 4px 12px rgba(108, 92, 231, 0.4);
+}
