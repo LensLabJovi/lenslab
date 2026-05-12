@@ -119,11 +119,11 @@ lenslab/
 ├── index.html                  ← Landing pública
 ├── INTEGRANTES.TXT
 ├── README.md
-├── pages/                      ← 9 páginas internas (login, cadastro, home,
+├── pages/                      ← 10 páginas internas (login, cadastro, home,
 │                                  camera, pos-captura, galeria, modos, sobre,
 │                                  contato, ideias-futuras)
-├── css/                        ← 13 folhas (uma por página + reset, variables, global)
-├── js/                         ← 12 scripts (uma responsabilidade por arquivo)
+├── css/                        ← 15 folhas (uma por página + reset, variables, global)
+├── js/                         ← 13 scripts (uma responsabilidade por arquivo)
 └── assets/                     ← Imagens dos slides
 ```
 
