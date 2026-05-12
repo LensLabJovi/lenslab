@@ -66,4 +66,30 @@ const Auth = {
   }
 };
 
+document.addEventListener("DOMContentLoaded", function () {
+  const botoesOlho = document.querySelectorAll(".password-toggle");
+
+  botoesOlho.forEach(function (botao) {
+    botao.addEventListener("click", function () {
+      const idAlvo = botao.getAttribute("data-target");
+      const campo = document.getElementById(idAlvo);
+      if (!campo) return;
+
+      const visivel = campo.type === "text";
+
+      if (visivel) {
+        campo.type = "password";
+        botao.textContent = "👁";
+        botao.setAttribute("aria-label", "Mostrar senha");
+        botao.classList.remove("is-visible");
+      } else {
+        campo.type = "text";
+        botao.textContent = "🙈";
+        botao.setAttribute("aria-label", "Ocultar senha");
+        botao.classList.add("is-visible");
+      }
+    });
+  });
+});
+
 console.log("✓ auth.js carregado");
