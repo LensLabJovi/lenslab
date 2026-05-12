@@ -1,0 +1,468 @@
+/* ============================================
+   PÓS-CAPTURA — Tela após tirar foto
+   ============================================ */
+
+.post-preview {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.preview-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.preview-img[hidden] {
+  display: none;
+}
+
+.preview-text {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* O banner volta a aparecer quando o JS o desesconde */
+.detect-banner[hidden] {
+  display: none;
+}
+
+.back-arrow {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--text);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.detect-banner {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  background: rgba(108, 92, 231, 0.12);
+  border: 1px solid rgba(108, 92, 231, 0.25);
+  border-radius: 16px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.detect-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(108, 92, 231, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.detect-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.detect-text strong {
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.detect-text small {
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.detect-arrow {
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+/* ---------- AÇÕES ---------- */
+.post-actions {
+  display: flex;
+  justify-content: space-around;
+  gap: 8px;
+  padding: 16px 20px 40px;
+  background: var(--bg);
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 8px;
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background: var(--surface-light);
+  color: var(--text);
+}
+
+.action-btn.primary {
+  background: rgba(231, 76, 60, 0.15);
+  border-color: rgba(231, 76, 60, 0.4);
+  color: var(--danger);
+}
+
+.action-icon {
+  font-size: 22px;
+}
+
+.action-label {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* ============================================
+   TOAST — notificação animada
+   ============================================ */
+
+.toast {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 14px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 500;
+  white-space: nowrap;
+  max-width: 90%;
+}
+
+.toast.visivel {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast-icon {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.toast-msg {
+  font-size: 13px;
+}
+
+/* ============================================
+   AÇÃO EXTRA — Citação ABNT (visível só em
+   modos de estudo)
+   ============================================ */
+.post-extras {
+  padding: 0 16px 32px;
+  flex-shrink: 0;
+}
+
+.post-actions.with-extras {
+  padding-bottom: 12px;
+}
+
+.post-extras[hidden] {
+  display: none;
+}
+
+.action-btn.extra {
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg,
+              rgba(108, 92, 231, 0.18),
+              rgba(0, 210, 211, 0.1));
+  border: 1px solid rgba(108, 92, 231, 0.4);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.action-btn.extra:hover {
+  background: linear-gradient(135deg,
+              rgba(108, 92, 231, 0.28),
+              rgba(0, 210, 211, 0.16));
+  transform: translateY(-1px);
+}
+
+.action-btn.extra .action-icon {
+  font-size: 18px;
+}
+
+.action-btn.extra .action-label {
+  font-size: 0.92rem;
+}
+
+/* ============================================
+   MODAL DE CITAÇÃO ABNT
+   ============================================ */
+.citacao-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  pointer-events: none;
+}
+
+.citacao-modal[hidden] {
+  display: none;
+}
+
+.citacao-modal.aberto {
+  pointer-events: auto;
+}
+
+.citacao-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.citacao-modal.aberto .citacao-backdrop {
+  opacity: 1;
+}
+
+.citacao-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 460px;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 24px;
+  transform: scale(0.94);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+.citacao-modal.aberto .citacao-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.citacao-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s;
+}
+
+.citacao-close:hover {
+  background: rgba(231, 76, 60, 0.3);
+}
+
+.citacao-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.citacao-emoji {
+  font-size: 26px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(108, 92, 231, 0.2);
+  border: 1px solid rgba(108, 92, 231, 0.35);
+  flex-shrink: 0;
+}
+
+.citacao-header h3 {
+  font-size: 1.1rem;
+  margin-bottom: 3px;
+  color: var(--text);
+}
+
+.citacao-header p {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.citacao-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cf-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.citacao-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.citacao-form input {
+  padding: 9px 11px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 0.88rem;
+  transition: border-color 0.18s, background 0.18s;
+}
+
+.citacao-form input:focus {
+  outline: none;
+  border-color: rgba(108, 92, 231, 0.5);
+  background: rgba(108, 92, 231, 0.05);
+}
+
+.cf-submit {
+  margin-top: 6px;
+  padding: 11px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6C5CE7, #00D2D3);
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.cf-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(108, 92, 231, 0.35);
+}
+
+.citacao-result {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px dashed var(--card-border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.citacao-result strong {
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.citacao-result textarea {
+  width: 100%;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-family: var(--font-mono, monospace);
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.cf-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.cf-btn {
+  flex: 1;
+  padding: 9px 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid var(--card-border);
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.cf-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.cf-btn.primary {
+  background: rgba(108, 92, 231, 0.25);
+  border-color: rgba(108, 92, 231, 0.5);
+  color: #fff;
+}
+
+.cf-btn.primary:hover {
+  background: rgba(108, 92, 231, 0.4);
+}

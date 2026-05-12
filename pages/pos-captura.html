@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foto Capturada — LensLab</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/camera.css">
+  <link rel="stylesheet" href="../css/post-captura.css">
+</head>
+
+<body class="camera-page">
+
+  <main class="camera-app">
+
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <span>📶</span>
+        <span>🔋</span>
+      </div>
+    </div>
+
+    <!-- ========== PREVIEW DA FOTO ========== -->
+    <section class="post-preview">
+      <a href="camera.html" class="back-arrow" aria-label="Voltar">←</a>
+
+      <div class="preview-image" id="previewImage">
+        <img class="preview-img" id="previewImg" alt="Foto capturada" hidden>
+        <span class="preview-text" id="previewFallback">Carregando foto...</span>
+      </div>
+
+      <!-- Banner com info do modo usado -->
+      <div class="detect-banner" id="detectBanner" hidden>
+        <span class="detect-icon" id="detectIcon">✨</span>
+        <div class="detect-text">
+          <strong id="detectTitle">Modo Documento</strong>
+          <small id="detectSubtitle">Capturada agora</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== AÇÕES ========== -->
+    <section class="post-actions">
+      <button class="action-btn primary" data-action="excluir">
+        <span class="action-icon">🗑️</span>
+        <span class="action-label">Excluir</span>
+      </button>
+
+      <button class="action-btn" data-action="melhorar">
+        <span class="action-icon">✨</span>
+        <span class="action-label">Melhorar</span>
+      </button>
+
+      <button class="action-btn" data-action="compartilhar">
+        <span class="action-icon">📤</span>
+        <span class="action-label">Compartilhar</span>
+      </button>
+
+      <button class="action-btn" data-action="baixar">
+        <span class="action-icon">💾</span>
+        <span class="action-label">Baixar</span>
+      </button>
+    </section>
+
+    <!-- Ação extra (visível só em modos de estudo) -->
+    <section class="post-extras" id="postExtras" hidden>
+      <button class="action-btn extra" data-action="citacao">
+        <span class="action-icon">📚</span>
+        <span class="action-label">Gerar citação ABNT</span>
+      </button>
+    </section>
+
+  </main>
+
+  <!-- ========== MODAL DE CITAÇÃO ABNT ========== -->
+  <div class="citacao-modal" id="citacaoModal" hidden>
+    <div class="citacao-backdrop" data-citacao-close></div>
+    <div class="citacao-content">
+      <button class="citacao-close" data-citacao-close type="button" aria-label="Fechar">✕</button>
+
+      <header class="citacao-header">
+        <span class="citacao-emoji">📚</span>
+        <div>
+          <h3>Gerar citação ABNT</h3>
+          <p>Preencha os dados da fonte. A citação aparece formatada pra colar no seu trabalho.</p>
+        </div>
+      </header>
+
+      <form class="citacao-form" id="citacaoForm" novalidate>
+        <div class="cf-row">
+          <label>Sobrenome do autor *
+            <input name="sobrenome" required placeholder="Ex: SILVA">
+          </label>
+          <label>Nome do autor *
+            <input name="nome" required placeholder="Ex: João">
+          </label>
+        </div>
+
+        <label>Título da obra *
+          <input name="titulo" required placeholder="Ex: Cálculo I — Funções e Limites">
+        </label>
+
+        <div class="cf-row">
+          <label>Cidade
+            <input name="cidade" placeholder="Ex: São Paulo">
+          </label>
+          <label>Editora
+            <input name="editora" placeholder="Ex: Atlas">
+          </label>
+        </div>
+
+        <div class="cf-row">
+          <label>Ano
+            <input name="ano" type="number" min="1500" max="2099" placeholder="Ex: 2023">
+          </label>
+          <label>Páginas
+            <input name="paginas" placeholder="Ex: 45-58">
+          </label>
+        </div>
+
+        <button type="submit" class="cf-submit">Gerar citação</button>
+      </form>
+
+      <div class="citacao-result" id="citacaoResult" hidden>
+        <strong>📋 Citação gerada:</strong>
+        <textarea id="citacaoTexto" readonly rows="4"></textarea>
+        <div class="cf-actions">
+          <button type="button" class="cf-btn primary" id="citacaoCopiar">Copiar</button>
+          <button type="button" class="cf-btn" id="citacaoNova">Gerar outra</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="../js/auth.js"></script>
+<script src="../js/protect.js"></script>
+<script src="../js/photos.js"></script>
+<script src="../js/post-captura.js"></script>
+</body>
+</html>
