@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeria — LensLab</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/galeria.css">
+  <link rel="stylesheet" href="../css/stage.css">
+</head>
+<body class="galeria-page">
+
+  <!-- Orbs de fundo (ambient) -->
+  <div class="page-orb orb-purple"></div>
+  <div class="page-orb orb-cyan"></div>
+
+  <!-- Voltar para a home (visível em desktop) -->
+  <a href="home.html" class="stage-back">← Voltar para a home</a>
+
+  <main class="stage-grid">
+
+    <!-- ========== PAINEL ESQUERDO (pitch) ========== -->
+    <aside class="stage-panel stage-panel-left">
+      <a href="home.html" class="stage-logo" aria-label="LensLab">
+        <img src="../assets/galeria/lenslab.png" alt="LensLab">
+      </a>
+      <span class="stage-tag">🖼️ Sua galeria</span>
+      <h1 class="stage-title">Tudo o que você<br>capturou, organizado</h1>
+      <p class="stage-desc">
+        Cada captura no LensLab vem pra cá. Filtre por modo, marque
+        favoritos, organize por matéria e revisite suas memórias.
+      </p>
+      <ul class="stage-bullets">
+        <li>Slideshow automático de destaques</li>
+        <li>Filtros por modo e categoria</li>
+        <li>Memória ativa: fotos antigas reaparecem na home</li>
+        <li>Tudo salvo no seu dispositivo</li>
+      </ul>
+    </aside>
+
+    <!-- ========== CELULAR (galeria) ========== -->
+    <div class="galeria-app">
+
+    <!-- ========== STATUS BAR (simulada) ========== -->
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <span>📶</span>
+        <span>🔋</span>
+      </div>
+    </div>
+
+    <!-- ========== HEADER DO APP (mobile) ========== -->
+    <header class="app-header">
+      <a href="home.html" class="app-back" aria-label="Voltar ao início">←</a>
+      <h1 class="app-title">Galeria</h1>
+      <a href="camera.html" class="app-action" aria-label="Abrir câmera">📸</a>
+    </header>
+
+    <!-- ========== CONTEÚDO ROLÁVEL ========== -->
+    <div class="galeria-scroll">
+
+      <!-- ---------- SLIDESHOW DESTAQUE ---------- -->
+      <section class="slideshow" aria-label="Carrossel de destaques">
+
+        <div class="slideshow-container">
+          <div class="slide active" data-slide="0">
+            <div class="slide-image" style="background: linear-gradient(145deg, #6C5CE7, #00D2D3);">
+              <img class="slide-photo" src="../assets/galeria/slides/documento.png" alt="" onerror="this.remove()">
+              <span class="slide-emoji">📄</span>
+            </div>
+            <div class="slide-info">
+              <span class="slide-tag">Documento</span>
+              <h2>Escaneie qualquer documento</h2>
+              <p>Conversão automática em PDF com correção de perspectiva</p>
+            </div>
+          </div>
+
+          <div class="slide" data-slide="1">
+            <div class="slide-image" style="background: linear-gradient(145deg, #FD79A8, #6C5CE7);">
+              <img class="slide-photo" src="../assets/galeria/slides/retrato.png" alt="" onerror="this.remove()">
+              <span class="slide-emoji">👤</span>
+            </div>
+            <div class="slide-info">
+              <span class="slide-tag">Retrato</span>
+              <h2>Foco profissional no rosto</h2>
+              <p>Desfoque inteligente do fundo destaca o sujeito</p>
+            </div>
+          </div>
+
+          <div class="slide" data-slide="2">
+            <div class="slide-image" style="background: linear-gradient(145deg, #FDCB6E, #E17055);">
+              <img class="slide-photo" src="../assets/galeria/slides/noturno.png" alt="" onerror="this.remove()">
+              <span class="slide-emoji">🌙</span>
+            </div>
+            <div class="slide-info">
+              <span class="slide-tag">Noturno</span>
+              <h2>Capturas brilhantes no escuro</h2>
+              <p>Reduz ruído e mantém detalhes em pouca luz</p>
+            </div>
+          </div>
+
+          <div class="slide" data-slide="3">
+            <div class="slide-image" style="background: linear-gradient(145deg, #00B894, #55EFC4);">
+              <img class="slide-photo" src="../assets/galeria/slides/panorama.png" alt="" onerror="this.remove()">
+              <span class="slide-emoji">🏞️</span>
+            </div>
+            <div class="slide-info">
+              <span class="slide-tag">Panorama</span>
+              <h2>Paisagens em sua amplitude</h2>
+              <p>Cenários em 180° com alta resolução</p>
+            </div>
+          </div>
+
+          <div class="slide" data-slide="4">
+            <div class="slide-image" style="background: linear-gradient(145deg, #74B9FF, #A29BFE);">
+              <img class="slide-photo" src="../assets/galeria/slides/macro.png" alt="" onerror="this.remove()">
+              <span class="slide-emoji">🔬</span>
+            </div>
+            <div class="slide-info">
+              <span class="slide-tag">Macro</span>
+              <h2>Detalhes microscópicos</h2>
+              <p>Aproxime o invisível e revele texturas</p>
+            </div>
+          </div>
+
+          <button class="slide-arrow prev" aria-label="Slide anterior">‹</button>
+          <button class="slide-arrow next" aria-label="Próximo slide">›</button>
+
+          <div class="slide-indicators">
+            <button class="indicator active" data-target="0" aria-label="Ir para slide 1"></button>
+            <button class="indicator" data-target="1" aria-label="Ir para slide 2"></button>
+            <button class="indicator" data-target="2" aria-label="Ir para slide 3"></button>
+            <button class="indicator" data-target="3" aria-label="Ir para slide 4"></button>
+            <button class="indicator" data-target="4" aria-label="Ir para slide 5"></button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ---------- SUAS FOTOS ---------- -->
+      <section class="user-photos-section">
+        <div class="user-photos-header">
+          <div>
+            <h2>Suas capturas</h2>
+            <small id="contadorFotos">Carregando...</small>
+          </div>
+          <!-- Toggle: Grade vs Diário -->
+          <div class="view-toggle" role="tablist" aria-label="Modo de visualização">
+            <button class="view-btn active" data-view="grid" role="tab" aria-label="Visualizar em grade">▦</button>
+            <button class="view-btn" data-view="diary" role="tab" aria-label="Visualizar como diário">📅</button>
+          </div>
+        </div>
+
+        <!-- Filtros (rolagem horizontal no mobile) -->
+        <div class="gallery-filters">
+          <button class="filter-btn active" data-filter="all">Todos</button>
+          <button class="filter-btn" data-filter="doc">Documentos</button>
+          <button class="filter-btn" data-filter="portrait">Retratos</button>
+          <button class="filter-btn" data-filter="night">Noturnos</button>
+          <button class="filter-btn" data-filter="landscape">Paisagens</button>
+        </div>
+
+        <!-- Filtro por matéria (aparece só se houver fotos com matéria) -->
+        <div class="materia-filter" id="materiaFilter" hidden>
+          <span class="materia-label">📚 Por matéria</span>
+          <div class="materia-chips" id="materiaChips"></div>
+        </div>
+
+        <!-- Grid populado pelo galeria.js a partir do localStorage -->
+        <div class="photo-grid" id="photoGrid"></div>
+
+        <!-- Estado vazio -->
+        <div class="empty-state" id="emptyState" hidden>
+          <span class="empty-emoji">📭</span>
+          <strong>Nenhuma foto ainda</strong>
+          <small>Capture sua primeira foto pra começar a montar sua galeria</small>
+          <a href="camera.html" class="empty-cta">📸 Abrir câmera</a>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ========== FAB (atalho pra câmera) ========== -->
+    <a href="camera.html" class="galeria-fab" aria-label="Tirar nova foto">
+      <span>📷</span>
+    </a>
+
+    </div>
+    <!-- /.galeria-app -->
+
+    <!-- ========== PAINEL DIREITO (stats dinâmicas) ========== -->
+    <aside class="stage-panel stage-panel-right">
+      <h2 class="stage-panel-title">Suas estatísticas</h2>
+      <div class="stage-stats">
+        <div class="stage-stat">
+          <strong id="statTotal">0</strong>
+          <span>Fotos capturadas</span>
+        </div>
+        <div class="stage-stat">
+          <strong id="statModos">0</strong>
+          <span>Modos diferentes usados</span>
+        </div>
+        <div class="stage-stat">
+          <strong id="statMaterias">0</strong>
+          <span>Matérias organizadas</span>
+        </div>
+      </div>
+      <p class="stage-tip">
+        💡 Toque numa foto pra abrir os detalhes em tela cheia.
+      </p>
+    </aside>
+
+  </main>
+
+  <!-- ========== MODAL DE FOTO EM TELA CHEIA ========== -->
+  <div class="photo-modal" id="photoModal" hidden>
+    <div class="photo-modal-backdrop" data-modal-close></div>
+    <div class="photo-modal-content">
+      <button class="photo-modal-close" data-modal-close aria-label="Fechar">✕</button>
+      <img class="photo-modal-img" id="photoModalImg" alt="Foto ampliada">
+      <div class="photo-modal-info">
+        <div class="photo-modal-meta">
+          <strong id="photoModalTitle">Modo Documento</strong>
+          <small id="photoModalDate">Hoje · 14:22</small>
+        </div>
+        <div class="photo-modal-actions">
+          <button class="photo-modal-btn" id="photoModalDownload">⬇ Baixar</button>
+          <button class="photo-modal-btn danger" id="photoModalDelete">🗑 Excluir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="../js/auth.js"></script>
+<script src="../js/protect.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/photos.js"></script>
+<script src="../js/galeria.js"></script>
+</body>
+</html>

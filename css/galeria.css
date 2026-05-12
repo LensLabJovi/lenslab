@@ -1,0 +1,854 @@
+/* ============================================
+   GALERIA — Layout em formato de celular
+   ============================================ */
+
+.galeria-page {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(108, 92, 231, 0.12), transparent 50%),
+    radial-gradient(circle at 80% 100%, rgba(0, 210, 211, 0.10), transparent 55%),
+    var(--bg-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.galeria-app {
+  width: 100%;
+  max-width: 420px;
+  height: 90vh;
+  max-height: 820px;
+  background: var(--bg);
+  border-radius: 36px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 50px 100px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* ---------- STATUS BAR ---------- */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.status-icons {
+  display: flex;
+  gap: 6px;
+  font-size: 12px;
+}
+
+/* ---------- HEADER DO APP ---------- */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px 14px;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.app-back,
+.app-action {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text);
+  font-size: 18px;
+  text-decoration: none;
+  transition: background 0.18s, transform 0.15s;
+}
+
+.app-back:hover,
+.app-action:hover {
+  background: var(--surface-light);
+  transform: translateY(-1px);
+}
+
+.app-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.2px;
+}
+
+/* ---------- CONTEÚDO ROLÁVEL ---------- */
+.galeria-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px 14px 28px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.15) transparent;
+}
+
+.galeria-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.galeria-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+  border-radius: 4px;
+}
+
+/* ---------- SLIDESHOW ---------- */
+.slideshow {
+  margin-bottom: 20px;
+}
+
+.slideshow-container {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  height: 320px;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.slide-image {
+  height: 160px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.slide-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Foto real do slide — quando o arquivo existe em assets/galeria/slides/.
+   Cobre o .slide-image inteiro (emoji+gradiente ficam por baixo).
+   Se a imagem falhar ao carregar, o onerror remove o <img> e o
+   emoji + gradiente reaparecem como fallback. */
+.slide-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  display: block;
+}
+
+.slide-emoji {
+  font-size: 4.5rem;
+  position: relative;
+  z-index: 0;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.4));
+}
+
+.slide-info {
+  flex: 1;
+  padding: 16px 20px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.slide-tag {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 3px 10px;
+  background: rgba(108, 92, 231, 0.2);
+  border: 1px solid rgba(108, 92, 231, 0.4);
+  border-radius: 14px;
+  color: var(--primary-light);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.slide-info h2 {
+  font-size: 1.15rem;
+  line-height: 1.25;
+  color: var(--text);
+}
+
+.slide-info p {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+/* Setas (compactas pro mobile) */
+.slide-arrow {
+  position: absolute;
+  top: 80px;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+  transition: background 0.2s;
+  line-height: 1;
+  cursor: pointer;
+  border: none;
+}
+
+.slide-arrow:hover {
+  background: var(--primary);
+}
+
+.slide-arrow.prev { left: 10px; }
+.slide-arrow.next { right: 10px; }
+
+/* Indicadores */
+.slide-indicators {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 10;
+}
+
+.indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.indicator.active {
+  width: 22px;
+  border-radius: 3px;
+  background: #fff;
+}
+
+/* ---------- HEADER DA SEÇÃO ---------- */
+.user-photos-section {
+  margin-top: 8px;
+}
+
+.user-photos-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 0 2px;
+  gap: 10px;
+}
+
+.user-photos-header h2 {
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.user-photos-header small {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  display: block;
+}
+
+/* ---------- VIEW TOGGLE (Grade vs Diário) ---------- */
+.view-toggle {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  flex-shrink: 0;
+}
+
+.view-btn {
+  width: 32px;
+  height: 28px;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  transition: background 0.18s, color 0.18s;
+}
+
+.view-btn:hover {
+  color: var(--text);
+}
+
+.view-btn.active {
+  background: rgba(108, 92, 231, 0.25);
+  color: #fff;
+}
+
+/* ---------- FILTRO POR MATÉRIA ---------- */
+.materia-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 0 2px;
+}
+
+.materia-filter[hidden] {
+  display: none;
+}
+
+.materia-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.materia-chips {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.15) transparent;
+  padding: 2px 0 4px;
+}
+
+.materia-chips::-webkit-scrollbar {
+  height: 4px;
+}
+
+.materia-chips::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+}
+
+.materia-chip {
+  flex-shrink: 0;
+  padding: 5px 11px;
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.materia-chip:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+}
+
+.materia-chip.active {
+  background: rgba(108, 92, 231, 0.25);
+  border-color: rgba(108, 92, 231, 0.5);
+  color: #fff;
+}
+
+/* ---------- FILTROS (scroll horizontal no celular) ---------- */
+.gallery-filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 2px 8px;
+  margin: 0 -2px 4px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+
+.gallery-filters::-webkit-scrollbar {
+  height: 6px;
+}
+
+.gallery-filters::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.gallery-filters::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.18);
+  border-radius: 3px;
+}
+
+.gallery-filters::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.32);
+}
+
+.filter-btn {
+  flex-shrink: 0;
+  padding: 7px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.filter-btn:hover {
+  background: var(--surface-light);
+  color: var(--text);
+}
+
+.filter-btn.active {
+  background: rgba(108, 92, 231, 0.22);
+  border-color: rgba(108, 92, 231, 0.5);
+  color: var(--primary-light);
+}
+
+/* ---------- GRID 3 COLUNAS (estilo Fotos / Instagram) ---------- */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+
+.photo-card {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.18s, opacity 0.3s;
+}
+
+.photo-card:active {
+  transform: scale(0.97);
+}
+
+.photo-card.hidden {
+  display: none;
+}
+
+.photo-thumb {
+  display: none; /* placeholder antigo — não usado mais */
+}
+
+.photo-thumb-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #000;
+}
+
+.photo-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Info aparece como overlay sutil só no canto inferior, ao toque */
+.photo-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 8px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.photo-card:hover .photo-info,
+.photo-card:focus-within .photo-info {
+  opacity: 1;
+}
+
+.photo-info strong {
+  font-size: 0.7rem;
+  color: #fff;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+.photo-info small {
+  font-size: 0.62rem;
+  color: rgba(255,255,255,0.85);
+}
+
+/* Tag de matéria no canto superior esquerdo do card */
+.photo-materia {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  padding: 3px 7px;
+  border-radius: 8px;
+  background: rgba(108, 92, 231, 0.85);
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  backdrop-filter: blur(6px);
+  max-width: calc(100% - 8px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------- MODO DIÁRIO ---------- */
+.photo-grid.diary-mode {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.diary-day {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.diary-day-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0 2px 6px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.diary-day-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.2px;
+}
+
+.diary-day-count {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.diary-day-photos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+
+/* ---------- ESTADO VAZIO (sem nenhuma foto) ---------- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 40px 20px;
+  text-align: center;
+  background: var(--card-bg);
+  border: 1px dashed var(--card-border);
+  border-radius: var(--radius-lg);
+}
+
+.empty-state[hidden] {
+  display: none;
+}
+
+.empty-emoji {
+  font-size: 44px;
+  margin-bottom: 4px;
+}
+
+.empty-state strong {
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.empty-state small {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  max-width: 260px;
+  line-height: 1.4;
+}
+
+.empty-cta {
+  margin-top: 10px;
+  padding: 9px 20px;
+  border-radius: 22px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.empty-cta:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+/* Filtro vazio */
+.filter-empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 32px 20px;
+  text-align: center;
+  background: var(--card-bg);
+  border: 1px dashed var(--card-border);
+  border-radius: var(--radius-lg);
+}
+
+.filter-empty strong {
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.filter-empty small {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+/* ---------- FAB (botão flutuante "tirar foto") ---------- */
+.galeria-fab {
+  position: absolute;
+  right: 18px;
+  bottom: 22px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  text-decoration: none;
+  box-shadow:
+    0 8px 22px rgba(108, 92, 231, 0.45),
+    0 0 0 3px rgba(255,255,255,0.06);
+  transition: transform 0.18s, box-shadow 0.18s;
+  z-index: 50;
+}
+
+.galeria-fab:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow:
+    0 10px 26px rgba(108, 92, 231, 0.55),
+    0 0 0 3px rgba(255,255,255,0.1);
+}
+
+.galeria-fab:active {
+  transform: scale(0.95);
+}
+
+/* ============================================
+   MODAL DE FOTO EM TELA CHEIA
+   ============================================ */
+
+.photo-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  pointer-events: none;
+}
+
+.photo-modal[hidden] {
+  display: none;
+}
+
+.photo-modal.aberto {
+  pointer-events: auto;
+}
+
+.photo-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.photo-modal.aberto .photo-modal-backdrop {
+  opacity: 1;
+}
+
+.photo-modal-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  gap: 12px;
+  transform: scale(0.92);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.photo-modal.aberto .photo-modal-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.photo-modal-img {
+  max-width: 100%;
+  max-height: 65vh;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  background: #000;
+}
+
+.photo-modal-close {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  cursor: pointer;
+  border: none;
+}
+
+.photo-modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.photo-modal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.photo-modal-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.photo-modal-meta strong {
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.photo-modal-meta small {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.photo-modal-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.photo-modal-btn {
+  flex: 1;
+  padding: 9px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 1px solid var(--card-border);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.photo-modal-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.photo-modal-btn.danger {
+  background: rgba(231, 76, 60, 0.15);
+  border-color: rgba(231, 76, 60, 0.4);
+  color: var(--danger);
+}
+
+.photo-modal-btn.danger:hover {
+  background: rgba(231, 76, 60, 0.25);
+}
+
+/* ---------- TELAS BEM PEQUENAS ---------- */
+@media (max-width: 380px) {
+  .galeria-page {
+    padding: 0;
+  }
+  .galeria-app {
+    height: 100vh;
+    max-height: none;
+    border-radius: 0;
+  }
+}
