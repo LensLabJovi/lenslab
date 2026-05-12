@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Câmera — LensLab</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/camera.css">
+  <link rel="stylesheet" href="../css/stage.css">
+</head>
+<body class="camera-page">
+
+  <!-- Orbs de fundo (ambient) -->
+  <div class="page-orb orb-purple"></div>
+  <div class="page-orb orb-cyan"></div>
+
+  <!-- Voltar para a home (visível em desktop) -->
+  <a href="home.html" class="stage-back">← Voltar para a home</a>
+
+  <main class="stage-grid">
+
+    <!-- ========== PAINEL ESQUERDO (pitch) ========== -->
+    <aside class="stage-panel stage-panel-left">
+      <a href="home.html" class="stage-logo" aria-label="LensLab">
+        <img src="../assets/galeria/lenslab.png" alt="LensLab">
+      </a>
+      <span class="stage-tag">📸 Protótipo funcional</span>
+      <h1 class="stage-title">Sua câmera<br>direto do navegador</h1>
+      <p class="stage-desc">
+        Teste todos os modos do LensLab no protótipo ao lado.
+        Use sua câmera real ou ative o modo demo com imagens prontas.
+      </p>
+      <ul class="stage-bullets">
+        <li>13 modos especializados de captura</li>
+        <li>Filtros e ajustes em tempo real</li>
+        <li>Funciona sem câmera (modo demo)</li>
+        <li>Pós-captura com edição rápida</li>
+      </ul>
+    </aside>
+
+    <!-- ========== CELULAR (protótipo) ========== -->
+    <div class="camera-app">
+
+    <!-- ========== STATUS BAR (simulada) ========== -->
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <span>📶</span>
+        <span>🔋</span>
+      </div>
+    </div>
+
+    <!-- ========== VIEWFINDER ========== -->
+    <section class="viewfinder" aria-label="Visor da câmera">
+
+      <!-- Vídeo da câmera real (getUserMedia) -->
+      <video id="cameraVideo" class="camera-video" autoplay playsinline muted></video>
+
+      <!-- Modo demo: imagem carregada pelo usuário ou cena pré-renderizada -->
+      <img id="demoImg" class="camera-video demo-source" alt="Imagem demo" hidden>
+      <canvas id="demoCanvas" class="camera-video demo-source" hidden></canvas>
+
+      <!-- Canvas escondido — usado para capturar frames -->
+      <canvas id="captureCanvas" class="capture-canvas" hidden></canvas>
+
+      <!-- Banner do modo demo (visível enquanto demo está ativo) -->
+      <div class="demo-banner" id="demoBanner" hidden>
+        <span class="demo-label">🎭 Modo Demo</span>
+        <span class="demo-source-name" id="demoSourceName">Cena: Pôr do sol</span>
+        <button class="demo-banner-btn" data-demo-action="picker">Trocar</button>
+        <button class="demo-banner-btn danger" data-demo-action="exit" aria-label="Sair do modo demo">✕</button>
+      </div>
+
+      <!-- Input de arquivo (escondido — disparado por botão) -->
+      <input type="file" id="demoFileInput" accept="image/*" hidden>
+
+      <!-- Tela de erro / permissão negada -->
+      <div class="camera-error" id="cameraError" hidden>
+        <div class="camera-error-icon">📷</div>
+        <h3 class="camera-error-title">Câmera indisponível</h3>
+        <p class="camera-error-msg" id="cameraErrorMsg">
+          Não foi possível acessar a câmera.
+        </p>
+        <div class="camera-error-actions">
+          <button class="camera-error-retry" id="cameraRetryBtn">Tentar novamente</button>
+          <button class="camera-error-demo" id="cameraDemoBtn">🎭 Usar modo demo</button>
+        </div>
+        <small class="camera-error-hint">
+          Sem câmera? O modo demo deixa você testar todo o fluxo usando uma imagem do seu dispositivo ou cenas prontas.
+        </small>
+      </div>
+
+      <!-- Controles superiores -->
+      <div class="top-controls">
+        <div class="top-controls-left">
+          <a href="home.html" class="back-home" aria-label="Voltar ao início">←</a>
+
+          <button class="ctrl-btn" aria-label="Alternar flash" data-control="flash">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              <line class="flash-strike" x1="2" y1="2" x2="22" y2="22"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="top-controls-right">
+          <button class="ctrl-btn" aria-label="Mostrar grade" data-control="grid">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <line x1="8" y1="3" x2="8" y2="21"/>
+              <line x1="16" y1="3" x2="16" y2="21"/>
+              <line x1="3" y1="8" x2="21" y2="8"/>
+              <line x1="3" y1="16" x2="21" y2="16"/>
+            </svg>
+          </button>
+
+          <button class="ctrl-btn" aria-label="Timer" data-control="timer">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+              <circle cx="12" cy="13" r="8"/>
+              <path d="M12 9v4l2 2"/>
+            </svg>
+            <span class="timer-badge" hidden></span>
+          </button>
+
+          <button class="ctrl-btn" aria-label="Configurações" data-open="advanced-menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Anel de foco -->
+      <div class="focus-ring-camera"></div>
+
+      <!-- Badge "Modo silencioso" (auto-ativado de noite) -->
+      <button class="silent-badge" id="silentBadge" type="button" hidden aria-label="Alternar modo silencioso"></button>
+
+      <!-- Banner de sugestão adaptativa (aprende rotina do usuário) -->
+      <div class="adaptive-banner" id="adaptiveBanner" hidden>
+        <span class="adaptive-icon">💡</span>
+        <span class="adaptive-text" id="adaptiveText"></span>
+        <button class="adaptive-btn" data-adaptive-action="ativar">Ativar</button>
+        <button class="adaptive-btn ghost" data-adaptive-action="dispensar" aria-label="Dispensar">✕</button>
+      </div>
+
+      <!-- Badge de modo ativo -->
+      <div class="mode-badge" hidden>
+        <span>✨</span>
+        <span>Modo Documento sugerido</span>
+      </div>
+
+      <!-- Contagem regressiva do timer -->
+      <div class="countdown-overlay" id="countdownOverlay" hidden>
+        <span class="countdown-num" id="countdownNum">3</span>
+      </div>
+
+      <!-- Timestamp da foto (aparece logo após capturar) -->
+      <div class="capture-timestamp" id="captureTimestamp" hidden></div>
+
+      <!-- Controles de zoom -->
+      <div class="zoom-controls">
+        <button class="zoom-btn" data-zoom="0.5">.5</button>
+        <button class="zoom-btn active" data-zoom="1">1×</button>
+        <button class="zoom-btn" data-zoom="2">2</button>
+      </div>
+
+    </section>
+
+    <!-- ========== CONTROLES INFERIORES ========== -->
+    <section class="bottom-panel">
+
+      <!-- Sugestões rápidas -->
+      <div class="suggestions">
+        <div class="suggestion-chips">
+          <button class="chip" data-mode="doc" style="--chip-color: #6C5CE7;">
+            <span>📄</span>
+            <span>Documento</span>
+          </button>
+          <button class="chip" data-mode="portrait" style="--chip-color: #FD79A8;">
+            <span>👤</span>
+            <span>Retrato</span>
+          </button>
+          <button class="chip" data-mode="night" style="--chip-color: #FDCB6E;">
+            <span>🌙</span>
+            <span>Noturno</span>
+          </button>
+        </div>
+        <button class="more-btn" aria-label="Mais modos" data-open="quick-modes-menu">⋯</button>
+      </div>
+
+      <!-- Modos principais -->
+      <nav class="mode-selector" aria-label="Seleção de modo">
+        <button class="mode-item active">Foto</button>
+        <button class="mode-item">Vídeo</button>
+        <button class="mode-item">Retrato</button>
+        <button class="mode-item">Noturno</button>
+      </nav>
+
+      <!-- Botões de captura -->
+      <div class="capture-row">
+        <a class="thumbnail-btn" href="galeria.html" aria-label="Ver galeria" id="thumbnailLink">
+          <img class="thumbnail-img" id="thumbnailImg" alt="" hidden>
+        </a>
+
+        <button class="capture-btn" aria-label="Capturar foto" id="captureButton">
+          <span class="capture-inner"></span>
+        </button>
+
+        <button class="flip-btn" aria-label="Virar câmera">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9"/>
+          </svg>
+        </button>
+      </div>
+
+      <button class="advanced-link" data-open="advanced-menu">
+        ⚙ Avançado
+      </button>
+
+    </section>
+
+    <!-- ========== MENU MODOS RÁPIDOS (overlay) ========== -->
+    <aside class="overlay" id="quick-modes-menu" hidden>
+      <div class="overlay-backdrop" data-close></div>
+      <div class="bottom-sheet">
+        <div class="sheet-handle"></div>
+
+        <header class="sheet-header">
+          <div>
+            <h3>Modos Rápidos</h3>
+            <p>Toque para ativar uma sugestão</p>
+          </div>
+          <button class="close-btn" data-close aria-label="Fechar">✕</button>
+        </header>
+
+        <section class="sheet-section">
+          <h4>Principais</h4>
+          <div class="modes-row">
+            <button class="mode-card" data-mode="doc" style="--mc-color: #6C5CE7;">
+              <span class="mc-icon">📄</span>
+              <span class="mc-label">Documento</span>
+            </button>
+            <button class="mode-card" data-mode="portrait" style="--mc-color: #FD79A8;">
+              <span class="mc-icon">👤</span>
+              <span class="mc-label">Retrato</span>
+            </button>
+            <button class="mode-card" data-mode="night" style="--mc-color: #FDCB6E;">
+              <span class="mc-icon">🌙</span>
+              <span class="mc-label">Noturno</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="sheet-section">
+          <h4>Todos os modos</h4>
+          <div class="modes-grid">
+            <button class="mode-list-item" data-mode="caderno" style="--mc-color: #00D2D3;">
+              <span class="mc-icon">📓</span>
+              <div>
+                <strong>Caderno</strong>
+                <small>Digitalizar anotações</small>
+              </div>
+            </button>
+            <button class="mode-list-item" data-mode="qrcode" style="--mc-color: #74B9FF;">
+              <span class="mc-icon">🔲</span>
+              <div>
+                <strong>QR Code</strong>
+                <small>Ler códigos QR e barras</small>
+              </div>
+            </button>
+            <button class="mode-list-item" data-mode="comida" style="--mc-color: #E17055;">
+              <span class="mc-icon">🍔</span>
+              <div>
+                <strong>Comida</strong>
+                <small>Cores vibrantes</small>
+              </div>
+            </button>
+            <button class="mode-list-item" data-mode="panorama" style="--mc-color: #55EFC4;">
+              <span class="mc-icon">🏞️</span>
+              <div>
+                <strong>Panorama</strong>
+                <small>Paisagens amplas</small>
+              </div>
+            </button>
+            <button class="mode-list-item" data-mode="macro" style="--mc-color: #FFEAA7;">
+              <span class="mc-icon">🔬</span>
+              <div>
+                <strong>Macro</strong>
+                <small>Detalhes de perto</small>
+              </div>
+            </button>
+            <button class="mode-list-item" data-mode="slowmo" style="--mc-color: #FF7675;">
+              <span class="mc-icon">🐢</span>
+              <div>
+                <strong>Câmera Lenta</strong>
+                <small>Vídeo em slow motion</small>
+              </div>
+            </button>
+            <button class="mode-list-item" data-mode="timelapse" style="--mc-color: #A29BFE;">
+              <span class="mc-icon">⏱️</span>
+              <div>
+                <strong>Time-lapse</strong>
+                <small>Vídeo acelerado</small>
+              </div>
+            </button>
+            <button class="mode-list-item" data-mode="hdr" style="--mc-color: #FD79A8;">
+              <span class="mc-icon">✨</span>
+              <div>
+                <strong>HDR</strong>
+                <small>Alto alcance dinâmico</small>
+              </div>
+            </button>
+            <button class="mode-list-item" data-mode="lousa" style="--mc-color: #81ECEC;">
+              <span class="mc-icon">📋</span>
+              <div>
+                <strong>Lousa</strong>
+                <small>Capturar quadro branco</small>
+              </div>
+            </button>
+            <button class="mode-list-item" data-mode="selfie" style="--mc-color: #E056C1;">
+              <span class="mc-icon">🤳</span>
+              <div>
+                <strong>Selfie+</strong>
+                <small>Selfie com filtros</small>
+              </div>
+            </button>
+          </div>
+        </section>
+      </div>
+    </aside>
+
+    <!-- ========== SELETOR DE MATÉRIA (overlay) ========== -->
+    <aside class="overlay" id="materia-overlay" hidden>
+      <div class="overlay-backdrop" data-materia-skip></div>
+      <div class="bottom-sheet materia-sheet">
+        <div class="sheet-handle"></div>
+
+        <header class="sheet-header">
+          <div>
+            <h3>📚 Qual a matéria?</h3>
+            <p>Selecione uma já cadastrada ou adicione uma nova.</p>
+          </div>
+          <button class="close-btn" data-materia-skip aria-label="Pular">✕</button>
+        </header>
+
+        <section class="sheet-section">
+          <h4>Já cadastradas</h4>
+          <div class="materia-list" id="materiaList">
+            <!-- preenchido dinamicamente pelo camera.js -->
+          </div>
+        </section>
+
+        <section class="sheet-section">
+          <h4>Adicionar nova</h4>
+          <form class="materia-new-form" id="materiaNewForm" autocomplete="off">
+            <input type="text" id="materiaNewInput"
+                   placeholder="Ex: Cálculo I, Português, Biologia"
+                   maxlength="40" required>
+            <button type="submit" class="materia-add-btn">+ Adicionar</button>
+          </form>
+        </section>
+
+        <button class="materia-skip-btn" data-materia-skip type="button">
+          Pular sem matéria
+        </button>
+      </div>
+    </aside>
+
+    <!-- ========== SELETOR DO MODO DEMO (overlay) ========== -->
+    <aside class="overlay" id="demo-picker" hidden>
+      <div class="overlay-backdrop" data-close></div>
+      <div class="bottom-sheet">
+        <div class="sheet-handle"></div>
+
+        <header class="sheet-header">
+          <div>
+            <h3>🎭 Modo Demo</h3>
+            <p>Teste o app sem precisar de câmera</p>
+          </div>
+          <button class="close-btn" data-close aria-label="Fechar">✕</button>
+        </header>
+
+        <section class="sheet-section">
+          <h4>Sua imagem</h4>
+          <button class="demo-upload-btn" id="demoUploadTrigger">
+            <span class="adv-icon">📁</span>
+            <div class="adv-info">
+              <strong>Carregar do dispositivo</strong>
+              <small>JPG, PNG ou qualquer imagem do seu computador/celular</small>
+            </div>
+            <span class="adv-arrow">›</span>
+          </button>
+        </section>
+
+        <section class="sheet-section">
+          <h4>Ou escolha uma cena</h4>
+          <div class="modes-grid">
+            <button class="mode-list-item" data-scene="sunset" style="--mc-color: #FF6B6B;">
+              <span class="mc-icon">🌅</span>
+              <div>
+                <strong>Pôr do sol</strong>
+                <small>Tons quentes</small>
+              </div>
+            </button>
+            <button class="mode-list-item" data-scene="ocean" style="--mc-color: #0F3460;">
+              <span class="mc-icon">🌊</span>
+              <div>
+                <strong>Oceano</strong>
+                <small>Azul profundo</small>
+              </div>
+            </button>
+            <button class="mode-list-item" data-scene="forest" style="--mc-color: #00B894;">
+              <span class="mc-icon">🌲</span>
+              <div>
+                <strong>Floresta</strong>
+                <small>Verdes e luz</small>
+              </div>
+            </button>
+            <button class="mode-list-item" data-scene="city" style="--mc-color: #6C5CE7;">
+              <span class="mc-icon">🌃</span>
+              <div>
+                <strong>Cidade noturna</strong>
+                <small>Para testar Modo Noturno</small>
+              </div>
+            </button>
+            <button class="mode-list-item" data-scene="food" style="--mc-color: #E17055;">
+              <span class="mc-icon">🍔</span>
+              <div>
+                <strong>Comida</strong>
+                <small>Para testar Modo Comida</small>
+              </div>
+            </button>
+            <button class="mode-list-item" data-scene="document" style="--mc-color: #6C5CE7;">
+              <span class="mc-icon">📄</span>
+              <div>
+                <strong>Documento</strong>
+                <small>Texto sobre fundo claro</small>
+              </div>
+            </button>
+          </div>
+        </section>
+      </div>
+    </aside>
+
+    <!-- ========== MENU AVANÇADO (overlay) ========== -->
+    <aside class="overlay" id="advanced-menu" hidden>
+      <div class="overlay-backdrop" data-close></div>
+      <div class="bottom-sheet">
+        <div class="sheet-handle"></div>
+
+        <header class="sheet-header">
+          <div>
+            <h3>Controles Avançados</h3>
+            <p>Ajuste fino para fotógrafos experientes</p>
+          </div>
+          <button class="close-btn" data-close aria-label="Fechar">✕</button>
+        </header>
+
+        <div class="advanced-list">
+
+          <!-- AJUSTES (sliders funcionais) -->
+          <h4 class="adv-group-title">Ajustes</h4>
+
+          <div class="advanced-slider">
+            <div class="slider-header">
+              <span class="adv-icon">☀️</span>
+              <strong>Brilho</strong>
+              <span class="slider-value" id="valBrilho">100%</span>
+            </div>
+            <input type="range" min="50" max="150" value="100" id="ctrlBrilho" class="slider">
+          </div>
+
+          <div class="advanced-slider">
+            <div class="slider-header">
+              <span class="adv-icon">🎨</span>
+              <strong>Saturação</strong>
+              <span class="slider-value" id="valSaturacao">100%</span>
+            </div>
+            <input type="range" min="0" max="200" value="100" id="ctrlSaturacao" class="slider">
+          </div>
+
+          <div class="advanced-slider">
+            <div class="slider-header">
+              <span class="adv-icon">📊</span>
+              <strong>Contraste</strong>
+              <span class="slider-value" id="valContraste">100%</span>
+            </div>
+            <input type="range" min="50" max="200" value="100" id="ctrlContraste" class="slider">
+          </div>
+
+          <!-- COMPOSIÇÃO -->
+          <h4 class="adv-group-title">Composição</h4>
+
+          <div class="advanced-segmented">
+            <div class="segmented-label">
+              <span class="adv-icon">📐</span>
+              <strong>Proporção</strong>
+            </div>
+            <div class="segmented-options">
+              <button class="seg-btn active" data-aspect="full">Cheio</button>
+              <button class="seg-btn" data-aspect="3-4">3:4</button>
+              <button class="seg-btn" data-aspect="1-1">1:1</button>
+              <button class="seg-btn" data-aspect="9-16">9:16</button>
+              <button class="seg-btn" data-aspect="16-9">16:9</button>
+            </div>
+          </div>
+
+          <div class="advanced-segmented">
+            <div class="segmented-label">
+              <span class="adv-icon">⏱️</span>
+              <strong>Temporizador</strong>
+            </div>
+            <div class="segmented-options">
+              <button class="seg-btn active" data-timer="0">Off</button>
+              <button class="seg-btn" data-timer="3">3s</button>
+              <button class="seg-btn" data-timer="5">5s</button>
+              <button class="seg-btn" data-timer="10">10s</button>
+            </div>
+          </div>
+
+          <button class="reset-adjustments" id="resetAjustes">↺ Restaurar padrão</button>
+
+          <!-- INFORMATIVOS (visuais — não interativos por enquanto) -->
+          <h4 class="adv-group-title">Informações</h4>
+
+          <div class="advanced-item info-only">
+            <span class="adv-icon">🎯</span>
+            <div class="adv-info">
+              <strong>ISO</strong>
+              <small>Controlado automaticamente</small>
+            </div>
+            <span class="adv-value">Auto</span>
+          </div>
+
+          <div class="advanced-item info-only">
+            <span class="adv-icon">🛡️</span>
+            <div class="adv-info">
+              <strong>Estabilização</strong>
+              <small>Ativada por padrão</small>
+            </div>
+            <span class="adv-value">On</span>
+          </div>
+
+          <div class="advanced-item info-only">
+            <span class="adv-icon">☀️</span>
+            <div class="adv-info">
+              <strong>Balanço de Branco</strong>
+              <small>Ajuste automático</small>
+            </div>
+            <span class="adv-value">Auto</span>
+          </div>
+
+        </div>
+      </div>
+    </aside>
+
+    </div>
+    <!-- /.camera-app -->
+
+    <!-- ========== PAINEL DIREITO (como usar) ========== -->
+    <aside class="stage-panel stage-panel-right">
+      <h2 class="stage-panel-title">Como usar</h2>
+      <ol class="stage-steps">
+        <li><strong>1.</strong> Permita o acesso à câmera ou clique em <em>Modo demo</em>.</li>
+        <li><strong>2.</strong> Escolha um dos 13 modos pelo botão inferior.</li>
+        <li><strong>3.</strong> Ajuste filtros nos controles laterais.</li>
+        <li><strong>4.</strong> Toque no botão branco para capturar.</li>
+      </ol>
+      <p class="stage-tip">
+        💡 Cada captura vai pra sua galeria — você pode editar, marcar como
+        favorita ou organizar por matéria.
+      </p>
+    </aside>
+
+  </main>
+<script src="../js/auth.js"></script>
+<script src="../js/protect.js"></script>
+<script src="../js/photos.js"></script>
+<script src="../js/camera.js"></script>
+</body>
+</html>
