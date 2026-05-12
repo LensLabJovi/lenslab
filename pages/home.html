@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home — LensLab</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/home.css">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header">
+    <a href="home.html" class="logo">
+      <img class="logo-img" src="../assets/galeria/lenslab.png" alt="LensLab">
+    </a>
+
+    <nav class="site-nav" aria-label="Navegação principal">
+      <ul>
+        <li><a href="home.html" class="active">Início</a></li>
+        <li><a href="modos.html">Modos</a></li>
+        <li><a href="galeria.html">Galeria</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="ideias-futuras.html">Ideias</a></li>
+        <li><a href="contato.html">Contato</a></li>
+        <li><a href="login.html" class="btn-primary">Entrar</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ========== MEMÓRIA ATIVA (foto antiga reaparece) ========== -->
+    <section class="memory-card" id="memoryCard" hidden>
+      <a class="memory-thumb" href="galeria.html" id="memoryLink">
+        <img id="memoryImg" alt="Foto antiga">
+      </a>
+      <div class="memory-info">
+        <span class="memory-tag">⏳ Memória</span>
+        <strong id="memoryTitle">Há 7 dias atrás</strong>
+        <small id="memorySubtitle">Você capturou um momento neste dia</small>
+      </div>
+      <button class="memory-close" id="memoryClose" type="button" aria-label="Fechar memória">✕</button>
+    </section>
+
+    <!-- ========== HERO PERSONALIZADO ========== -->
+    <section class="hero">
+      <div class="hero-content">
+        <span class="hero-badge">
+          <span class="dot"></span>
+          <span id="welcomeText">Bem-vindo de volta</span>
+        </span>
+
+        <h1 class="hero-title">
+          Vamos capturar algo <span class="text-gradient">incrível</span><br>
+          hoje?
+        </h1>
+
+        <p class="hero-description">
+          13 modos especializados, controles avançados e detecção automática
+          de cenas. Tudo pronto para você usar.
+        </p>
+
+        <div class="hero-actions">
+          <a href="camera.html" class="btn-primary btn-large">
+            Abrir Câmera
+          </a>
+          <a href="galeria.html" class="btn-secondary btn-large">
+            Ver minhas fotos
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>13+</strong>
+            <span>Modos de captura</span>
+          </div>
+          <div class="stat">
+            <strong>10</strong>
+            <span>Controles avançados</span>
+          </div>
+          <div class="stat">
+            <strong>4K</strong>
+            <span>Qualidade máxima</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mockup do celular -->
+      <div class="hero-mockup">
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-viewfinder">
+              <img class="phone-slide is-active" src="../assets/galeria/slides/retrato.png"   alt="" data-mode="Retrato">
+              <img class="phone-slide"           src="../assets/galeria/slides/noturno.png"   alt="" data-mode="Noturno">
+              <img class="phone-slide"           src="../assets/galeria/slides/documento.png" alt="" data-mode="Documento">
+              <img class="phone-slide"           src="../assets/galeria/slides/panorama.png"  alt="" data-mode="Panorama">
+              <img class="phone-slide"           src="../assets/galeria/slides/macro.png"     alt="" data-mode="Macro">
+              <span class="phone-mode-label" id="phoneModeLabel">Retrato</span>
+              <div class="focus-ring"></div>
+            </div>
+            <div class="phone-controls">
+              <div class="capture-button"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FEATURES ========== -->
+    <section class="features" id="features">
+      <header class="section-header">
+        <h2>Recursos que transformam fotos</h2>
+        <p>Tudo o que você precisa para capturar momentos perfeitos</p>
+      </header>
+
+      <div class="features-grid">
+        <article class="feature-card">
+          <div class="feature-icon" style="background: rgba(108,92,231,0.15); color: #A29BFE;">📄</div>
+          <h3>Modo Documento</h3>
+          <p>Escaneie e converta documentos em PDF com correção automática de perspectiva.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon" style="background: rgba(253,121,168,0.15); color: #FD79A8;">👤</div>
+          <h3>Modo Retrato</h3>
+          <p>Foco perfeito no rosto com desfoque profissional do fundo.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon" style="background: rgba(253,203,110,0.15); color: #FDCB6E;">🌙</div>
+          <h3>Modo Noturno</h3>
+          <p>Capturas nítidas mesmo com pouca luz, sem perder detalhes.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon" style="background: rgba(0,210,211,0.15); color: #00D2D3;">⚙️</div>
+          <h3>Controles Pro</h3>
+          <p>ISO, velocidade, foco manual e balanço de branco para fotógrafos experientes.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon" style="background: rgba(116,185,255,0.15); color: #74B9FF;">🔲</div>
+          <h3>Leitor de QR Code</h3>
+          <p>Escaneie códigos QR e códigos de barras com um toque.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon" style="background: rgba(0,184,148,0.15); color: #00B894;">🎨</div>
+          <h3>Filtros Inteligentes</h3>
+          <p>Realce cores e detalhes automaticamente com IA integrada.</p>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html">Contato</a>
+      <a href="modos.html">Modos</a>
+      <a href="galeria.html">Galeria</a>
+    </div>
+    <p>© 2026 LensLab — Projeto acadêmico FIAP · Sprint 2</p>
+  </footer>
+
+  <script src="../js/auth.js"></script>
+  <script src="../js/protect.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/photos.js"></script>
+  <script src="../js/home.js"></script>
+</body>
+</html>
