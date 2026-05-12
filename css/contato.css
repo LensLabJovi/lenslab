@@ -1,0 +1,216 @@
+/* ============================================
+   CONTATO — Formulário + info
+   ============================================ */
+
+.contact-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.contact-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  margin-bottom: 60px;
+  padding: 40px 0;
+}
+
+.contact-hero h1 {
+  font-size: 2.75rem;
+}
+
+.contact-hero p {
+  font-size: 1.125rem;
+}
+
+.contact-grid {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+/* ---------- INFO CARDS ---------- */
+.contact-info {
+  flex: 1;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: all 0.3s;
+}
+
+.info-card:hover {
+  border-color: var(--primary);
+  transform: translateX(4px);
+}
+
+.info-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.info-card strong {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.info-card p {
+  font-size: 1rem;
+  color: var(--text);
+  margin: 0;
+}
+
+/* ---------- FORM ---------- */
+.contact-form {
+  flex: 2;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row-double {
+  display: flex;
+  gap: 16px;
+}
+
+.form-row-double .form-group {
+  flex: 1;
+}
+
+.contact-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-form label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  padding: 14px 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  transition: all 0.2s;
+}
+
+/* Lista do dropdown nativo: força fundo escuro + texto claro
+   (sem isso o OS renderiza branco no branco) */
+.contact-form select option {
+  background-color: #1e1e2e;
+  color: #f5f5f5;
+}
+
+.contact-form select option:checked,
+.contact-form select option:hover {
+  background-color: #2a2a40;
+  color: #ffffff;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(108, 92, 231, 0.05);
+  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.15);
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.5;
+}
+
+.contact-form input.error,
+.contact-form select.error,
+.contact-form textarea.error {
+  border-color: var(--danger);
+}
+
+.error-message {
+  font-size: 0.8rem;
+  color: var(--danger);
+  min-height: 16px;
+}
+
+.char-counter {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: right;
+  font-family: var(--font-mono);
+}
+
+/* ============================================
+   FEEDBACK VISUAL DE VALIDAÇÃO
+   ============================================ */
+
+.contact-form input.success,
+.contact-form select.success,
+.contact-form textarea.success {
+  border-color: var(--success);
+  background: rgba(0, 184, 148, 0.05);
+}
+
+.contact-form select.error {
+  border-color: var(--danger);
+  background: rgba(231, 76, 60, 0.05);
+}
+
+/* Contador transita de cor suavemente */
+.char-counter {
+  transition: color 0.3s ease;
+}
+
+/* ---------- RESPONSIVO ---------- */
+@media (max-width: 900px) {
+  .contact-grid {
+    flex-direction: column;
+  }
+
+  .contact-info {
+    max-width: 100%;
+  }
+
+  .form-row-double {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-page {
+    padding: 24px 20px;
+  }
+
+  .contact-form {
+    padding: 24px 20px;
+  }
+}

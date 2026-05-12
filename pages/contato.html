@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato — LensLab</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/contato.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="home.html" class="logo">
+      <img class="logo-img" src="../assets/galeria/lenslab.png" alt="LensLab">
+    </a>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="home.html">Início</a></li>
+        <li><a href="modos.html">Modos</a></li>
+        <li><a href="galeria.html">Galeria</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="ideias-futuras.html">Ideias</a></li>
+        <li><a href="contato.html" class="active">Contato</a></li>
+        <li><a href="login.html" class="btn-primary">Entrar</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="contact-page">
+
+    <header class="contact-hero">
+      <h1>Fale com a gente</h1>
+      <p>Dúvidas, sugestões ou feedback? Adoramos ouvir você.</p>
+    </header>
+
+    <div class="contact-grid">
+
+      <!-- Info de contato -->
+      <aside class="contact-info">
+        <article class="info-card">
+          <span class="info-icon">📧</span>
+          <strong>E-mail</strong>
+          <p>marcelo.scolesojr@gmail.com</p>
+        </article>
+
+        <article class="info-card">
+          <span class="info-icon">📞</span>
+          <strong>Telefone</strong>
+          <p>(11) 98950-0606</p>
+        </article>
+
+        <article class="info-card">
+          <span class="info-icon">📍</span>
+          <strong>Endereço</strong>
+          <p>FIAP — São Paulo, SP</p>
+        </article>
+      </aside>
+
+      <!-- Formulário (envio real via Formspree) -->
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/mykogoez" method="POST" novalidate>
+
+        <div class="form-row-double">
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome" required minlength="3">
+            <small class="error-message" id="nome-error"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="email-contato">E-mail</label>
+            <input type="email" id="email-contato" name="email" placeholder="seu@email.com" required>
+            <small class="error-message" id="email-contato-error"></small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="assunto">Assunto</label>
+          <select id="assunto" name="assunto" required>
+            <option value="">Selecione um assunto</option>
+            <option value="duvida">Dúvida</option>
+            <option value="sugestao">Sugestão</option>
+            <option value="bug">Reportar bug</option>
+            <option value="parceria">Parceria</option>
+            <option value="outro">Outro</option>
+          </select>
+          <small class="error-message" id="assunto-error"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="6" placeholder="Conte-nos sua dúvida, sugestão ou feedback..." required minlength="10"></textarea>
+          <small class="error-message" id="mensagem-error"></small>
+          <small class="char-counter">0 / 500 caracteres</small>
+        </div>
+
+        <button type="submit" class="btn-primary btn-large btn-block">
+          Enviar mensagem
+        </button>
+      </form>
+
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="sobre.html">Sobre</a>
+      <a href="modos.html">Modos</a>
+      <a href="galeria.html">Galeria</a>
+    </div>
+    <p>© 2026 LensLab — Projeto FIAP Sprint 2</p>
+  </footer>
+<script src="../js/auth.js"></script>
+<script src="../js/protect.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/contato.js"></script>
+</body>
+</html>
