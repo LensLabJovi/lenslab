@@ -1,0 +1,340 @@
+/* ============================================
+   IDEIAS FUTURAS — Roadmap de evolução
+   ============================================ */
+
+.ideias-page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 40px 32px 80px;
+}
+
+/* ---------- HERO ---------- */
+.ideias-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+  padding: 70px 0 36px;
+  position: relative;
+}
+
+.ideias-hero::before {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(620px, 85%);
+  height: 360px;
+  background: radial-gradient(ellipse at center,
+              rgba(0, 210, 211, 0.15) 0%,
+              rgba(108, 92, 231, 0.08) 40%,
+              transparent 70%);
+  filter: blur(50px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.ideias-hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.ideias-hero .hero-lead {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  max-width: 680px;
+  color: var(--text-secondary);
+}
+
+/* ---------- LEGENDA ---------- */
+.ideias-legenda {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 16px 0 48px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed var(--card-border);
+  border-radius: 14px;
+}
+
+.legenda-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.legenda-item strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.legenda-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legenda-dot.mock {
+  background: linear-gradient(135deg, #FDCB6E, #E17055);
+  box-shadow: 0 0 8px rgba(253, 203, 110, 0.5);
+}
+
+.legenda-dot.block {
+  background: linear-gradient(135deg, #E74C3C, #C0392B);
+  box-shadow: 0 0 8px rgba(231, 76, 60, 0.4);
+}
+
+/* ---------- PILAR ---------- */
+.pilar {
+  margin-bottom: 48px;
+}
+
+.pilar-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.pilar-emoji {
+  font-size: 1.6rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg,
+              rgba(108, 92, 231, 0.18),
+              rgba(0, 210, 211, 0.12));
+  border: 1px solid rgba(108, 92, 231, 0.3);
+  flex-shrink: 0;
+}
+
+.pilar-head h2 {
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.pilar-head small {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* ---------- GRID DE IDEIAS ---------- */
+.ideias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.ideia-card {
+  position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-left-width: 3px;
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+
+.ideia-card.mock {
+  border-left-color: #FDCB6E;
+}
+
+.ideia-card.block {
+  border-left-color: #E74C3C;
+}
+
+.ideia-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35);
+}
+
+.ideia-card.mock:hover {
+  border-color: rgba(253, 203, 110, 0.45);
+  border-left-color: #FDCB6E;
+}
+
+.ideia-card.block:hover {
+  border-color: rgba(231, 76, 60, 0.45);
+  border-left-color: #E74C3C;
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.card-icon {
+  font-size: 26px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--card-border);
+}
+
+.card-status {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.ideia-card.mock .card-status {
+  background: rgba(253, 203, 110, 0.18);
+  border: 1px solid rgba(253, 203, 110, 0.4);
+  color: #FDCB6E;
+}
+
+.ideia-card.block .card-status {
+  background: rgba(231, 76, 60, 0.18);
+  border: 1px solid rgba(231, 76, 60, 0.4);
+  color: #FF8B7A;
+}
+
+.ideia-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ideia-card p {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.card-block {
+  margin-top: auto;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  border-left: 2px solid var(--card-border);
+}
+
+/* ---------- FECHAMENTO ---------- */
+.ideias-fechamento {
+  margin-top: 56px;
+  padding: 40px 32px;
+  text-align: center;
+  background: linear-gradient(145deg,
+              rgba(108, 92, 231, 0.1),
+              rgba(0, 210, 211, 0.06));
+  border: 1px solid rgba(108, 92, 231, 0.3);
+  border-radius: var(--radius-xl);
+}
+
+.ideias-fechamento h3 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.ideias-fechamento p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.65;
+  max-width: 580px;
+  margin: 0 auto 24px;
+}
+
+.ideias-fechamento strong {
+  color: var(--primary-light, #A29BFE);
+  font-weight: 600;
+}
+
+.fechamento-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-link {
+  padding: 10px 20px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--card-border);
+  transition: background 0.2s, transform 0.18s;
+}
+
+.cta-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.cta-link.primary {
+  background: linear-gradient(135deg, #6C5CE7, #00D2D3);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(108, 92, 231, 0.3);
+}
+
+.cta-link.primary:hover {
+  box-shadow: 0 10px 28px rgba(108, 92, 231, 0.45);
+}
+
+/* ---------- RESPONSIVO ---------- */
+@media (max-width: 768px) {
+  .ideias-page {
+    padding: 24px 18px 60px;
+  }
+
+  .ideias-hero {
+    padding: 40px 0 24px;
+  }
+
+  .ideias-hero h1 {
+    font-size: 2rem;
+  }
+
+  .pilar-head h2 {
+    font-size: 1.2rem;
+  }
+
+  .pilar-emoji {
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+  }
+
+  .ideia-card {
+    padding: 18px;
+  }
+
+  .ideias-fechamento {
+    padding: 32px 20px;
+  }
+}

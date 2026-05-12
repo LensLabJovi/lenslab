@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ideias Futuras — LensLab</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/ideias-futuras.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="home.html" class="logo">
+      <img class="logo-img" src="../assets/galeria/lenslab.png" alt="LensLab">
+    </a>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="home.html">Início</a></li>
+        <li><a href="modos.html">Modos</a></li>
+        <li><a href="galeria.html">Galeria</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="ideias-futuras.html" class="active">Ideias</a></li>
+        <li><a href="contato.html">Contato</a></li>
+        <li><a href="login.html" class="btn-primary">Entrar</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="ideias-page">
+
+    <!-- ========== HERO ========== -->
+    <section class="ideias-hero">
+      <span class="hero-badge">
+        <span class="dot"></span>
+        Roadmap · Próximas Sprints
+      </span>
+      <h1>Ideias <span class="text-gradient">Futuras</span></h1>
+      <p class="hero-lead">
+        Funcionalidades que mapeamos durante a banca da JOVI mas que ficaram fora
+        do escopo da Sprint 2 — seja por dependerem de backend, machine learning
+        ou APIs nativas que o navegador não expõe. Aqui registramos cada uma
+        delas pra atacar nas próximas Sprints.
+      </p>
+    </section>
+
+    <!-- ========== LEGENDA ========== -->
+    <section class="ideias-legenda">
+      <div class="legenda-item">
+        <span class="legenda-dot mock"></span>
+        <span><strong>Mockável</strong> · dá pra demonstrar conceito mas precisa de IA / OCR pra funcionar de verdade</span>
+      </div>
+      <div class="legenda-item">
+        <span class="legenda-dot block"></span>
+        <span><strong>Bloqueado</strong> · precisa de backend, libs externas ou APIs móveis nativas</span>
+      </div>
+    </section>
+
+    <!-- ========== PILAR 1 — ESTUDO ========== -->
+    <section class="pilar">
+      <header class="pilar-head">
+        <span class="pilar-emoji">🎓</span>
+        <div>
+          <h2>A câmera que estuda com você</h2>
+          <small>Pilar 1 — ferramentas de estudo direto na lente</small>
+        </div>
+      </header>
+      <div class="ideias-grid">
+
+        <article class="ideia-card mock">
+          <div class="card-top">
+            <span class="card-icon">📊</span>
+            <span class="card-status">Mockável</span>
+          </div>
+          <h3>Quadro Inteligente</h3>
+          <p>Câmera apoiada na carteira durante a aula inteira. Em vez de gravar tudo, salva apenas os frames em que o conteúdo do quadro muda — gera 6 fotos da aula em vez de 1h de vídeo.</p>
+          <small class="card-block">Comparação de pixels com Canvas funciona, mas detectar "conteúdo significativo" sem ML é frágil.</small>
+        </article>
+
+        <article class="ideia-card mock">
+          <div class="card-top">
+            <span class="card-icon">🃏</span>
+            <span class="card-status">Mockável</span>
+          </div>
+          <h3>Flashcards automáticos</h3>
+          <p>Fotografa uma página de caderno e o app detecta listas e tópicos, transformando em cards de revisão estilo Anki para memorização espaçada.</p>
+          <small class="card-block">Sem OCR puro em JS, só dá pra simular com texto digitado depois ou marcação manual de regiões.</small>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ========== PILAR 2 — SOCIAL ========== -->
+    <section class="pilar">
+      <header class="pilar-head">
+        <span class="pilar-emoji">👥</span>
+        <div>
+          <h2>A câmera social</h2>
+          <small>Pilar 2 — captura como evento coletivo</small>
+        </div>
+      </header>
+      <div class="ideias-grid">
+
+        <article class="ideia-card block">
+          <div class="card-top">
+            <span class="card-icon">📡</span>
+            <span class="card-status">Bloqueado</span>
+          </div>
+          <h3>Modo Sincronizado em Grupo</h3>
+          <p>Você e seus amigos pareiam celulares antes do role. Quando UM aperta capturar, todos os celulares fotografam ao mesmo tempo, e tudo vai pro mesmo álbum compartilhado.</p>
+          <small class="card-block">Precisa de backend + WebSocket pra sincronizar dispositivos em tempo real. Fora do escopo de uma aplicação 100% client-side.</small>
+        </article>
+
+        <article class="ideia-card mock">
+          <div class="card-top">
+            <span class="card-icon">🛡️</span>
+            <span class="card-status">Mockável</span>
+          </div>
+          <h3>Privacidade Estudante</h3>
+          <p>Blur automático em rostos que não estão na sua lista de amigos. Posta foto da festa sem se preocupar em capturar pessoas no fundo que não querem aparecer.</p>
+          <small class="card-block">Detecção de rostos em JS puro sem TensorFlow.js / FaceAPI é praticamente inviável.</small>
+        </article>
+
+        <article class="ideia-card mock">
+          <div class="card-top">
+            <span class="card-icon">🎭</span>
+            <span class="card-status">Mockável</span>
+          </div>
+          <h3>Sticker Maker</h3>
+          <p>Selfie → recorta o fundo automaticamente → vira sticker pra mandar no WhatsApp/Telegram. Self-expression direto da câmera.</p>
+          <small class="card-block">Remoção de fundo real precisa de modelos ML (rembg, MediaPipe). Mock seria recortar com máscara genérica.</small>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ========== PILAR 3 — CONTEXTO ========== -->
+    <section class="pilar">
+      <header class="pilar-head">
+        <span class="pilar-emoji">🧠</span>
+        <div>
+          <h2>A câmera que entende contexto</h2>
+          <small>Pilar 3 — antecipação inteligente da rotina</small>
+        </div>
+      </header>
+      <div class="ideias-grid">
+
+        <article class="ideia-card block">
+          <div class="card-top">
+            <span class="card-icon">📤</span>
+            <span class="card-status">Bloqueado</span>
+          </div>
+          <h3>Compartilhamento Sugerido</h3>
+          <p>Depois da foto, em vez de mostrar a galeria toda, app sugere direto pra quem mandar baseado no padrão: foto do quadro → "Mandar pro grupo Cálculo III?"</p>
+          <small class="card-block">Browsers não expõem contatos do telefone nem APIs diretas pra grupos do WhatsApp/Telegram. Fora do escopo da web.</small>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ========== PILAR 4 — EXPRESSÃO ========== -->
+    <section class="pilar">
+      <header class="pilar-head">
+        <span class="pilar-emoji">🎨</span>
+        <div>
+          <h2>Auto-expressão (DNA JOVI)</h2>
+          <small>Pilar 4 — câmera como ferramenta de identidade</small>
+        </div>
+      </header>
+      <div class="ideias-grid">
+
+        <article class="ideia-card mock">
+          <div class="card-top">
+            <span class="card-icon">🎬</span>
+            <span class="card-status">A explorar</span>
+          </div>
+          <h3>Anota Isso</h3>
+          <p>Tira a foto + grava 30s de áudio simultâneo da explicação do professor. Foto da página + voz dele, vinculados na galeria. Toca o áudio enquanto você revê a foto.</p>
+          <small class="card-block">Tecnicamente viável com MediaRecorder + getUserMedia. Será atacada na Sprint 3 como prioridade.</small>
+        </article>
+
+        <article class="ideia-card mock">
+          <div class="card-top">
+            <span class="card-icon">🌅</span>
+            <span class="card-status">A explorar</span>
+          </div>
+          <h3>Modo Hora Dourada</h3>
+          <p>App avisa proativamente: "O sol vai se pôr em 12 minutos. Bom momento pra uma selfie de pôr-do-sol" baseado em geolocalização e hora local.</p>
+          <small class="card-block">Possível com Geolocation API + cálculo de pôr-do-sol. Vai entrar na próxima Sprint.</small>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ========== CTA FECHAMENTO ========== -->
+    <section class="ideias-fechamento">
+      <h3>📌 Por que documentar tudo isso?</h3>
+      <p>
+        A banca da JOVI nos cobrou pensar fora da caixinha — e durante o brainstorm
+        surgiram muitas ideias que não cabiam no escopo desta Sprint, mas que merecem
+        ser registradas. Essa página vira nosso <strong>roadmap de evolução</strong>:
+        cada item aqui é um candidato concreto pra próxima Sprint, com a barreira
+        técnica já mapeada.
+      </p>
+      <div class="fechamento-actions">
+        <a href="sobre.html" class="cta-link">← Voltar para Sobre</a>
+        <a href="contato.html" class="cta-link primary">💬 Tem outra ideia? Manda pra gente</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html">Contato</a>
+      <a href="modos.html">Modos</a>
+    </div>
+    <p>© 2026 LensLab — Projeto FIAP Sprint 2</p>
+  </footer>
+<script src="../js/auth.js"></script>
+<script src="../js/protect.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>
