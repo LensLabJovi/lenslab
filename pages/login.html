@@ -59,7 +59,7 @@
             <input type="checkbox" name="remember">
             <span>Lembrar de mim</span>
           </label>
-          <a href="#" class="link-secondary">Esqueci minha senha</a>
+          <a href="#" class="link-secondary" id="forgotPasswordLink">Esqueci minha senha</a>
         </div>
 
         <button type="submit" class="btn-primary btn-large btn-block">
@@ -89,6 +89,42 @@
     </aside>
 
   </main>
+
+  <div class="modal-overlay" id="forgotPasswordModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="forgotTitle">
+      <button type="button" class="modal-close" id="forgotClose" aria-label="Fechar">×</button>
+
+      <header class="modal-header">
+        <span class="logo-icon">🔑</span>
+        <h2 id="forgotTitle">Recuperar senha</h2>
+        <p>Digite seu e-mail e enviaremos um link para você redefinir sua senha.</p>
+      </header>
+
+      <form class="auth-form" id="forgotForm" novalidate>
+        <div class="form-group">
+          <label for="forgotEmail">E-mail</label>
+          <input
+            type="email"
+            id="forgotEmail"
+            name="forgotEmail"
+            placeholder="seu@email.com"
+            required
+            autocomplete="email"
+          >
+          <small class="error-message" id="forgotEmail-error"></small>
+        </div>
+
+        <button type="submit" class="btn-primary btn-block">Enviar link</button>
+      </form>
+
+      <div class="modal-success" id="forgotSuccess" hidden>
+        <span class="success-icon">✅</span>
+        <h3>E-mail enviado!</h3>
+        <p id="forgotSuccessMsg">Verifique sua caixa de entrada para continuar.</p>
+      </div>
+    </div>
+  </div>
+
 <script src="../js/auth.js"></script>
 <script src="../js/main.js"></script>
 <script src="../js/login.js"></script>

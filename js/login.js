@@ -135,5 +135,125 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 1200);
   });
 
+
+  const linkEsqueci    = document.getElementById("forgotPasswordLink");
+  const modal          = document.getElementById("forgotPasswordModal");
+  const botaoFechar    = document.getElementById("forgotClose");
+  const formEsqueci    = document.getElementById("forgotForm");
+  const campoEmailModal = document.getElementById("forgotEmail");
+  const erroEmailModal  = document.getElementById("forgotEmail-error");
+  const blocoSucesso   = document.getElementById("forgotSuccess");
+  const mensagemSucesso = document.getElementById("forgotSuccessMsg");
+
+  function abrirModal() {
+    modal.removeAttribute("hidden");
+    document.body.classList.add("modal-open");
+
+
+    formEsqueci.removeAttribute("hidden");
+    blocoSucesso.setAttribute("hidden", "");
+    campoEmailModal.value = "";
+    campoEmailModal.classList.remove("error", "success");
+    erroEmailModal.textContent = "";
+
+
+    setTimeout(function () {
+      campoEmailModal.focus();
+    }, 50);
+  }
+
+  function fecharModal() {
+    modal.setAttribute("hidden", "");
+    document.body.classList.remove("modal-open");
+  }
+
+  if (linkEsqueci && modal) {
+    linkEsqueci.addEventListener("click", function (evento) {
+      evento.preventDefault();
+      abrirModal();
+    });
+
+    botaoFechar.addEventListener("click", fecharModal);
+
+
+    modal.addEventListener("click", function (evento) {
+      if (evento.target === modal) {
+        fecharModal();
+      }
+    });
+
+
+    document.addEventListener("keydown", function (evento) {
+      if (evento.key === "Escape" && !modal.hasAttribute("hidden")) {
+        fecharModal();
+      }
+    });
+
+    formEsqueci.addEventListener("submit", function (evento) {
+      evento.preventDefault();
+
+      const valor = campoEmailModal.value.trim();
+
+      if (valor === "") {
+        mostrarErro(campoEmailModal, erroEmailModal, "Digite seu e-mail");
+        return;
+      }
+
+      if (!emailValido(valor)) {
+        mostrarErro(campoEmailModal, erroEmailModal, "E-mail inválido (ex: nome@dominio.com)");
+        return;
+      }
+
+      limparErro(campoEmailModal, erroEmailModal);
+
+
+      const botaoEnviar = formEsqueci.querySelector('button[type="submit"]');
+      botaoEnviar.textContent = "Enviando...";
+      botaoEnviar.disabled = true;
+
+      setTimeout(function () {
+
+        formEsqueci.setAttribute("hidden", "");
+        blocoSucesso.removeAttribute("hidden");
+
+        const emailMascarado = mascararEmail(valor);
+        mensagemSucesso.textContent =
+          "Enviamos um link de recuperação para " + emailMascarado + ". Verifique sua caixa de entrada.";
+
+        botaoEnviar.textContent = "Enviar link";
+        botaoEnviar.disabled = false;
+
+
+        setTimeout(fecharModal, 3500);
+      }, 1000);
+    });
+
+    campoEmailModal.addEventListener("input", function () {
+      if (campoEmailModal.classList.contains("error")) {
+        const valor = campoEmailModal.value.trim();
+        if (valor !== "" && emailValido(valor)) {
+          limparErro(campoEmailModal, erroEmailModal);
+        }
+      }
+    });
+  }
+
+
+  function mascararEmail(email) {
+    const partes = email.split("@");
+    if (partes.length !== 2) return email;
+
+    const usuario = partes[0];
+    const dominio = partes[1];
+
+    if (usuario.length <= 2) {
+      return usuario.charAt(0) + "***@" + dominio;
+    }
+
+    const inicio = usuario.substring(0, 2);
+    const fim = usuario.charAt(usuario.length - 1);
+    return inicio + "***" + fim + "@" + dominio;
+  }
+
   console.log("✓ login.js carregado");
 });
